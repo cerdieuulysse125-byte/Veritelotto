@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="ht">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PROPRIO V27.9.30</title>
+<title>PROPRIO V27.9.31</title>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 <style>
@@ -22,9 +23,8 @@ body{background:#f2f2f2}
 .wrap{max-width:580px;margin:0 auto;padding:12px}
 .card{background:#fff;border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
 .blueBanner{background:#3b82f6;color:#fff;border-radius:10px;padding:10px;text-align:center;font-size:13px}
-.resCard{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #eee}
-.resLogo{width:90px;height:55px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:11px;text-align:center;color:#fff}
-.pill{display:inline-block;padding:3px 8px;border-radius:12px;color:#fff;font-weight:800;font-size:12px;margin:2px}
+.resCard{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #eee;gap:10px}
+.pill{display:inline-block;padding:4px 10px;border-radius:14px;color:#fff;font-weight:800;font-size:13px;margin:2px}
 .pillB{background:#2563eb}.pillO{background:#f59e0b}.pillG{background:#16a34a}.pillR{background:#ef4444}
 .stat{border-radius:12px;padding:14px;color:#fff;margin-bottom:10px}.stat b{font-size:26px}
 .btnO{background:#f97316;color:#fff;border:0;padding:13px;border-radius:10px;width:100%;font-weight:900;cursor:pointer}
@@ -54,6 +54,8 @@ label{font-size:12px;color:#666;display:block;margin-top:12px}
 .multiSel{border:1.5px solid #f97316;border-radius:10px;padding:6px;max-height:220px;overflow-y:auto;display:none;background:#fff}
 .multiSel.show{display:block}
 .multiSel label{display:flex;gap:8px;padding:9px 8px;border-bottom:1px solid #f5f5f5}
+.logoImg{width:92px;height:92px;object-fit:contain;flex-shrink:0}
+.logoFallback{width:92px;height:92px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:11px;text-align:center;line-height:1.2;flex-shrink:0}
 </style>
 </head>
 <body>
@@ -114,7 +116,7 @@ label{font-size:12px;color:#666;display:block;margin-top:12px}
 </div>
 
 <div class="wrap tabPage active" id="p-tablo">
-<div class="blueBanner">ℹ️ Siksè ou siksè DGL — V27.9.30</div>
+<div class="blueBanner">ℹ️ Siksè ou siksè DGL — V27.9.31</div>
 <div class="card"><div id="resList"></div>
 <div style="text-align:center"><button style="border:0;background:#fff;color:#2563eb" onclick="toggleRes()"><span id="resBtnTxt">⌄ Voir Plus (De Plus)</span></button></div></div>
 <div class="stat" style="background:#ef4444"><small>Total Vant (<span id="stVantN">15</span>)</small><br><b id="stVant">12,935</b></div>
@@ -124,7 +126,7 @@ label{font-size:12px;color:#666;display:block;margin-top:12px}
 <div class="stat" style="background:#2563eb"><small>Balans Total</small><br><b id="stBalans">-411</b></div>
 <button class="btnO" onclick="go('rapoVant',null)">Rapò Chak Jou</button>
 <div class="card" style="margin-top:12px;background:#dbeafe"><b style="color:#1e40af">Lo Ganyan pou jodia</b>
-<div class="tblWrap" style="margin-top:10px"><table class="tbl"><thead><tr><th>Tiraj</th><th>Tiraj 1</th><th>Tiraj 2</th><th>Tiraj 3</th><th>Total Tikè</th><th>Tikè ganyan</th><th>Pwofi / Pèt</th><th></th></tr></thead><tbody id="loGanyanTable"></tbody></table></div></div>
+<div class="tblWrap" style="margin-top:10px"><table class="tbl"><thead><tr><th>Tiraj</th><th>Tiraj 1 (L3 + 1e kole)</th><th>Tiraj 2</th><th>Tiraj 3</th><th>Total Tikè</th><th>Tikè ganyan</th><th>Pwofi / Pèt</th><th></th></tr></thead><tbody id="loGanyanTable"></tbody></table></div></div>
 <div class="card">
 <div class="row"><div><b>Fich istorik</b><br><small>kantite fich pa dat</small></div><button class="btnR" onclick="loadTablo()">↻ Rafrechi</button></div>
 <div class="row"><div><b>Tiraj istorik</b></div><button class="btnR" onclick="loadTablo()">↻ Rafrechi</button></div>
@@ -151,7 +153,7 @@ label{font-size:12px;color:#666;display:block;margin-top:12px}
 </div>
 <div class="card" id="toggles"></div>
 <button class="btnO" onclick="saveKont()">Anrejistre Chanjman</button>
-<div style="font-size:12px;color:#888;text-align:center;margin-top:8px">V27.9.30</div>
+<div style="font-size:12px;color:#888;text-align:center;margin-top:8px">V27.9.31</div>
 </div>
 <div class="wrap tabPage" id="p-istwa"><h3>Istwa Peman</h3><div class="card">Pa gen peman ankò.</div></div>
 
@@ -231,12 +233,12 @@ label{font-size:12px;color:#666;display:block;margin-top:12px}
 <label>Tiraj</label><select class="inp" id="lgTiraj"></select>
 <label>Pick 2</label><input class="inp" id="lgPick2" placeholder="Pick 2">
 <label>Pick 5</label><input class="inp" id="lgPick5" placeholder="Pick 5">
-<label>Lotto3 ak 1e Lò</label><input class="inp" id="lgL3" placeholder="ex: 172">
+<label>Lotto3 (L3) — 1e Lò a ap kole otomatikman</label><input class="inp" id="lgL3" placeholder="ex: 172 -> 1e: 72 otomatik">
 <label>2yèm Lò</label><input class="inp" id="lgR2" placeholder="ex: 85">
 <label>3yèm Lò</label><input class="inp" id="lgR3" placeholder="ex: 24">
 <label>Dat tiraj</label><input class="inp" id="lgDat" type="date" value="2026-11-11">
 <button class="btnO" id="btnSaveLot" onclick="saveLotGanyan()">Ajoute Tiraj</button>
-<small style="color:#666">Règ pa w la: 1e = 2 dènye chif L3 a. L3 172 → 1e 72.</small>
+<small style="color:#666">Règ pa w la: 1e = 2 dènye chif L3 a. L3 172 → 1e 72 kole ak L3 a, pa yon pil apa.</small>
 </div>
 </div>
 <div class="wrap tabPage" id="p-estatiLot">
@@ -398,16 +400,25 @@ function toggleD(){document.getElementById('drawer').classList.toggle('open');do
 function toggleSub(id){let e=document.getElementById(id);e.style.display=e.style.display==='none'?'block':'none';}
 function go(p,el){if(el){document.querySelectorAll('.mItem').forEach(m=>m.classList.remove('active'));el.classList.add('active');}document.querySelectorAll('.tabPage').forEach(x=>x.classList.remove('active'));let pg=document.getElementById('p-'+p);if(pg) pg.classList.add('active');else document.getElementById('p-tablo').classList.add('active');document.getElementById('pageTitle').innerText=p;toggleD();closeMenus();if(p==='tablo') loadTablo();if(p==='tiraj') renderTiraj();if(p==='primGen') renderPrimGen();if(p==='primVande') renderPrimVande();if(p==='maryajGratis') renderMaryajGratis();if(p==='lisVande') renderVande();if(p==='lotGanyan') renderLotGanyan();if(p==='estatiLot') renderEstatiLot();if(p==='blokeBoul') renderBloke();if(p==='lisOpsyon') renderOpsyon();if(p==='limit100') renderLimit100();if(p==='limitGrap') renderLimitGrap();if(p==='limitPe') renderLimitPe();if(p==='limitPwen') renderLimitPwen();if(p==='limitJwet') renderLimitJwet();if(p==='limitJwetVande') renderLimitVande();if(p==='kont') loadKont();if(p==='rapoVant') calcRapo('rapo');if(p==='rapoVande') populateVandeSelect();}
 function toggleRes(){showAllRes=!showAllRes;document.getElementById('resBtnTxt').innerText=showAllRes?'˄ Voir Moins':'⌄ Voir Plus (De Plus)';renderRes();}
-function getFamille(tirage){if(tirage.includes('New York')) return {nom:'NEW YORK LOTTERY',color:'#1e3a8a'};if(tirage.includes('Florida')) return {nom:'FLORIDA Lottery',color:'#f97316'};if(tirage.includes('Georgia')) return {nom:'GEORGIA LOTTERY',color:'#16a34a'};if(tirage.includes('Texas')) return {nom:'TEXAS LOTTERY',color:'#111'};if(tirage.includes('Tennessee')) return {nom:'TENNESSEE LOTTERY',color:'#16a34a'};if(tirage.includes('Primera')||tirage.includes('Premier')) return {nom:'PREMIER LOTTERY',color:'#dc2626'};if(tirage.includes('Suerte')) return {nom:'La Suerte DOMINICANA',color:'#2563eb'};return {nom:tirage.toUpperCase(),color:'#2563eb'};}
+function getFamille(tirage){
+if(tirage.includes('New York')) return {nom:'NEW YORK LOTTERY', logo:'<img class="logoImg" src="https://upload.wikimedia.org/wikipedia/en/thumb/6/6e/New_York_Lottery_logo.svg/320px-New_York_Lottery_logo.svg.png" onerror="this.outerHTML=\'<div class=\\\'logoFallback\\\' style=\\\'background:#1e3a8a;color:#fff\\\' >NEW YORK<br>LOTTERY</div>\'">'}; 
+if(tirage.includes('Florida')) return {nom:'FLORIDA Lottery', logo:'<img class="logoImg" src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5d/Florida_Lottery_logo.svg/320px-Florida_Lottery_logo.svg.png" onerror="this.outerHTML=\'<div class=\\\'logoFallback\\\' style=\\\'background:#fff;border:2px solid #f97316;color:#16a34a\\\' >FLORIDA<br>Lottery</div>\'">'}; 
+if(tirage.includes('Georgia')) return {nom:'GEORGIA LOTTERY', logo:'<img class="logoImg" src="https://upload.wikimedia.org/wikipedia/en/thumb/2/2e/Georgia_Lottery_logo.png/320px-Georgia_Lottery_logo.png" onerror="this.outerHTML=\'<div class=\\\'logoFallback\\\' style=\\\'background:#fff;border:2px solid #16a34a;color:#f59e0b\\\' >GEORGIA<br>LOTTERY</div>\'">'}; 
+if(tirage.includes('Texas')) return {nom:'TEXAS LOTTERY', logo:'<div class="logoFallback" style="background:#111;color:#fff;border-radius:8px">TEXAS<br>LOTTERY</div>'}; 
+if(tirage.includes('Tennessee')) return {nom:'TENNESSEE LOTTERY', logo:'<div class="logoFallback" style="background:#16a34a;color:#fff;border-radius:8px">TENNESSEE<br>LOTTERY</div>'}; 
+if(tirage.includes('Primera')||tirage.includes('Premier')) return {nom:'PREMIER LOTTERY', logo:'<div class="logoFallback" style="background:#dc2626;color:#fff;border-radius:8px">PREMIER</div>'}; 
+if(tirage.includes('Suerte')) return {nom:'La Suerte DOMINICANA', logo:'<div class="logoFallback" style="background:#2563eb;color:#fff;border-radius:8px">La Suerte</div>'}; 
+return {nom:tirage.toUpperCase(), logo:'<div class="logoFallback" style="background:#2563eb;color:#fff;height:55px;border-radius:8px">'+tirage.toUpperCase()+'</div>'}; 
+}
 function getLatestResults(){let map={};Object.entries(DB.results||{}).forEach(([id,r])=>{if(r.active===false) return;let key=(r.tirage||'').toLowerCase();if(!key) return;if(!map[key]||(r.dat||'')>=(map[key].dat||'')) map[key]={id,...r};});return Object.values(map);}
 function renderRes(){
 let latest=getLatestResults();let familles={};
-latest.forEach(r=>{let f=getFamille(r.tirage);if(!familles[f.nom]) familles[f.nom]={meta:f,rows:[]};let auj=new Date().toISOString().slice(0,10);let moment=r.tirage.includes('Midi')?'Midi':r.tirage.includes('Soir')?'Soir':r.tirage.includes('Matin')?'Matin':'';let label=(r.dat===auj?"Aujourd'hui ":"Hier ")+moment;familles[f.nom].rows.push({label,l3:r.l3||'—',r1:r.r1||'—',r2:r.r2||'—',dat:r.dat});});
-if(Object.keys(familles).length===0){familles={'NEW YORK LOTTERY':{meta:{nom:'NEW YORK LOTTERY',color:'#1e3a8a'},rows:[{label:'Hier Soir',l3:'716',r1:'45',r2:'64'},{label:"Aujourd'hui Midi",l3:'367',r1:'95',r2:'39'}]},'FLORIDA Lottery':{meta:{nom:'FLORIDA Lottery',color:'#f97316'},rows:[{label:'Hier Soir',l3:'488',r1:'08',r2:'21'},{label:"Aujourd'hui Midi",l3:'172',r1:'85',r2:'24'}]},'GEORGIA LOTTERY':{meta:{nom:'GEORGIA LOTTERY',color:'#16a34a'},rows:[{label:'Hier Soir',l3:'589',r1:'46',r2:'40'},{label:"Aujourd'hui Matin",l3:'712',r1:'45',r2:'56'}]}};}
-let arr=Object.values(familles);let list=showAllRes?arr:arr.slice(0,4);let h="";list.forEach(f=>{h+='<div class="resCard"><div class="resLogo" style="background:'+f.meta.color+'">'+f.meta.nom+'</div><div style="text-align:right">';f.rows.forEach(row=>{h+='<small>'+row.label+'</small><br><span class="pill pillB">'+row.l3+'</span><span class="pill pillO">'+row.r1+'</span><span class="pill pillG">'+row.r2+'</span><br>';});h+='</div></div>';});document.getElementById('resList').innerHTML=h;renderLoGanyan();
+latest.forEach(r=>{let f=getFamille(r.tirage);if(!familles[f.nom]) familles[f.nom]={meta:f,rows:[]};let auj=new Date().toISOString().slice(0,10);let moment=r.tirage.includes('Midi')?'Midi':r.tirage.includes('Soir')?'Soir':r.tirage.includes('Matin')?'Matin':'';let label=(r.dat===auj?"Aujourd'hui ":"Hier ")+moment;let l3=String(r.l3||'').padStart(3,'0');let premier=l3.slice(-2);let deuxieme=String(r.r2||'').padStart(2,'0');let troisieme=String(r.r3||'').padStart(2,'0');familles[f.nom].rows.push({label,l3,premier,deuxieme,troisieme});});
+if(Object.keys(familles).length===0){familles={'NEW YORK LOTTERY':{meta:getFamille('New York Midi'),rows:[{label:'Hier Soir',l3:'716',premier:'16',deuxieme:'45',troisieme:'64'},{label:"Aujourd'hui Midi",l3:'367',premier:'67',deuxieme:'95',troisieme:'39'}]},'FLORIDA Lottery':{meta:getFamille('Florida Midi'),rows:[{label:'Hier Soir',l3:'488',premier:'88',deuxieme:'08',troisieme:'21'},{label:"Aujourd'hui Midi",l3:'172',premier:'72',deuxieme:'85',troisieme:'24'}]},'GEORGIA LOTTERY':{meta:getFamille('Georgia Matin'),rows:[{label:'Hier Soir',l3:'589',premier:'89',deuxieme:'46',troisieme:'40'},{label:"Aujourd'hui Matin",l3:'712',premier:'12',deuxieme:'45',troisieme:'56'}]}};}
+let arr=Object.values(familles);let list=showAllRes?arr:arr.slice(0,4);let h="";list.forEach(f=>{h+='<div class="resCard"><div style="flex-shrink:0">'+f.meta.logo+'</div><div style="text-align:right">';f.rows.forEach(row=>{h+='<small>'+row.label+'</small><br><span class="pill pillB">'+row.l3+' <span style="font-size:9px;opacity:.85">1e:'+row.premier+'</span></span><span class="pill pillO">'+row.deuxieme+'</span><span class="pill pillG">'+row.troisieme+'</span><br>';});h+='</div></div>';});document.getElementById('resList').innerHTML=h;renderLoGanyan();
 }
 const LO_DEMO=[{t:"Tennessee Matin",a:"982",b:"09",c:"92",tik:2,tikG:1,prof:-3518},{t:"Texas Matin",a:"214",b:"93",c:"30",tik:1,tikG:0,prof:975},{t:"Primera Midi",a:"16",b:"55",c:"29",tik:0,tikG:0,prof:0},{t:"Suerte AM",a:"49",b:"69",c:"89",tik:0,tikG:0,prof:0},{t:"Georgia Matin",a:"712",b:"45",c:"56",tik:3,tikG:2,prof:-3238},{t:"Florida Midi",a:"172",b:"85",c:"24",tik:1,tikG:0,prof:390}];
-function renderLoGanyan(){let latest=getLatestResults();let rows=latest.length?latest.map(r=>({t:r.tirage,a:r.l3||'',b:r.r1||'',c:r.r2||'',tik:0,tikG:0,prof:0,id:r.id})):LO_DEMO;let h="";rows.forEach(r=>{h+='<tr><td>'+r.t+'</td><td>'+r.a+'</td><td>'+r.b+'</td><td>'+r.c+'</td><td>'+r.tik+'</td><td>'+r.tikG+'</td><td>'+(r.prof||0).toLocaleString()+'</td><td>'+dots('result',r.id||r.t,true)+'</td></tr>';});document.getElementById('loGanyanTable').innerHTML=h;}
+function renderLoGanyan(){let latest=getLatestResults();let rows=latest.length?latest.map(r=>{let l3=String(r.l3||'').padStart(3,'0');return {t:r.tirage,a:l3+' <small style="color:#2563eb">(1e:'+l3.slice(-2)+')</small>',b:String(r.r2||'').padStart(2,'0'),c:String(r.r3||'').padStart(2,'0'),tik:0,tikG:0,prof:0,id:r.id};}):LO_DEMO;let h="";rows.forEach(r=>{h+='<tr><td>'+r.t+'</td><td>'+r.a+'</td><td>'+r.b+'</td><td>'+r.c+'</td><td>'+r.tik+'</td><td>'+r.tikG+'</td><td>'+(r.prof||0).toLocaleString()+'</td><td>'+dots('result',r.id||r.t,true)+'</td></tr>';});document.getElementById('loGanyanTable').innerHTML=h;}
 function loadTablo(){renderRes();renderLoGanyan();}
 function renderTiraj(){let q=(document.getElementById('searchTiraj').value||'').toLowerCase();let demo=[{n:"Anguilla 10H AM",ouv:"06:00:00",fem:"08:50:00",jou:"Lendi, Madi, Mèkredi, Vandredi, Jedi, Dimanch",jf:"—",jb:"Lendi, Madi, Mèkredi, Samdi, Vandredi, Jedi, Dimanch",actif:true,stat:"Fèmen"},{n:"Anguilla 6h PM",ouv:"06:00:00",fem:"16:50:00",jou:"Lendi, Madi, Vandredi, Mèkredi, Samdi, Jedi, Dimanch",jf:"—",jb:"Lendi, Madi, Vandredi, Mèkredi, Samdi, Jedi, Dimanch",actif:true,stat:"An kou"},{n:"Florida Midi",ouv:"05:00:00",fem:"13:20:00",jou:"Quotidien",jf:"—",jb:"Quotidien",actif:true,stat:"An kou"},{n:"Florida Soir",ouv:"05:00:00",fem:"21:30:00",jou:"Quotidien",jf:"—",jb:"Quotidien",actif:true,stat:"An kou"}];Object.entries(DB.tirages||{}).forEach(([nom,d])=>{if(!demo.find(x=>x.n===nom)) demo.push({n:nom,ouv:d.heures?.de||"06:00:00",fem:d.heures?.a||"20:00:00",jou:(d.jours||[]).join(", ")||"Quotidien",jf:"—",jb:(d.jours||[]).join(", ")||"Quotidien",actif:d.active!==false,stat:d.active!==false?"An kou":"Fèmen"});});let h="";let last="";demo.filter(d=>d.n.toLowerCase().includes(q)).forEach(d=>{let sec=d.n.split(" ")[0].toUpperCase();if(sec!==last){h+='<tr><td colspan="8" class="secTitle">'+sec+'</td></tr>';last=sec;}h+='<tr><td><b>'+d.n+'</b></td><td>'+d.ouv+'</td><td>'+d.fem+'</td><td>'+d.jou+'</td><td>'+d.jf+'</td><td>'+d.jb+'</td><td><span class="pill '+(d.actif?'pillG':'pillR')+'">Aktif</span><br><span class="pill '+(d.stat==='Fèmen'?'pillR':'pillG')+'" style="margin-top:4px">'+d.stat+'</span></td><td>'+dots('tirage',d.n,d.actif)+'</td></tr>';});document.getElementById('tirajTableBody').innerHTML=h;}
 function openTirajForm(nom){EDIT={type:nom?'tirage':null,id:nom};document.getElementById('tirajFormTitle').innerText=nom?'Modifye tiraj':'Kreye nouvo tiraj';document.getElementById('btnSaveTiraj').innerText=nom?'Anregistre Chanjman':'Kreye Tiraj';if(nom){document.getElementById('newTirajNom').value=nom;let d=DB.tirages[nom]||{};if(d.heures){document.getElementById('newOuv').value=d.heures.de;document.getElementById('newFem').value=d.heures.a;}}go('kreyeTiraj',null);}
@@ -449,7 +460,4 @@ loadTablo();renderRes();renderToggles();populateVandeSelect();
 </script>
 </body>
 </html>
-
-
-
 
